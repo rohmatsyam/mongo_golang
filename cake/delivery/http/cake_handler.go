@@ -2,9 +2,10 @@ package http
 
 import (
 	"fmt"
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"github.com/rohmatsyam/mongo_golang/domain"
-	"net/http"
 )
 
 type CakeHandler struct {
@@ -40,8 +41,8 @@ func (h CakeHandler) GetCakes(c *gin.Context) {
 		})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{
-		"code":   http.StatusOK,
+	c.JSON(http.StatusFound, gin.H{
+		"code":   http.StatusFound,
 		"status": fmt.Sprintf("data found with length : %d", len(res)),
 		"data":   res,
 	})
@@ -56,7 +57,7 @@ func (h CakeHandler) GetCakeWithId(c *gin.Context) {
 		})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{
+	c.JSON(http.StatusFound, gin.H{
 		"code":   http.StatusFound,
 		"status": "data found",
 		"data":   res,
@@ -72,7 +73,7 @@ func (h CakeHandler) CreateCake(c *gin.Context) {
 		})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{
+	c.JSON(http.StatusCreated, gin.H{
 		"code":   http.StatusCreated,
 		"status": "Successfully created a cake",
 		"data":   res,
@@ -89,8 +90,8 @@ func (h CakeHandler) UpdateCake(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{
-		"code":   http.StatusFound,
-		"status": "data found",
+		"code":   http.StatusOK,
+		"status": "Successfully updated a cake",
 		"data":   res,
 	})
 }
@@ -104,7 +105,7 @@ func (h CakeHandler) DeleteCake(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{
-		"code":   http.StatusFound,
+		"code":   http.StatusOK,
 		"status": "succesfully deleted data",
 	})
 }

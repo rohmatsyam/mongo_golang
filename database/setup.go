@@ -30,6 +30,6 @@ func ConnectDB() (client *mongo.Client, err error) {
 
 // getting database collections
 func GetCollection(client *mongo.Client, collectionName string) *mongo.Collection {
-	collection := client.Database("golangAPI").Collection(collectionName)
+	collection := client.Database(EnvMongoDB()).Collection(collectionName)
 	return collection
 }
