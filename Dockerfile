@@ -17,5 +17,4 @@ RUN go install -mod=mod github.com/githubnemo/CompileDaemon
 EXPOSE 8000
 EXPOSE 27017
 
-ADD https://raw.githubusercontent.com/eficode/wait-for/v2.2.3/wait-for /usr/local/bin/wait-for
-ENTRYPOINT CompileDaemon --build="go build app/main.go" --command="go run app/main.go"
+ENTRYPOINT CompileDaemon --build="go build -o main app/main.go" --command=./main
